@@ -87,6 +87,9 @@ class AppFrame extends FlowPane {
     }
 
     private void startRecording() {
+        Thread t = new Thread(
+            new Runnable() {
+                public void run() {
         try {
             // the format of the TargetDataLine
             DataLine.Info dataLineInfo = new DataLine.Info(
@@ -111,7 +114,8 @@ class AppFrame extends FlowPane {
             recordingLabel.setVisible(false);
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
+        }}});
+        t.start();
     }
 
     private void stopRecording() {
